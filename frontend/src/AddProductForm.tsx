@@ -4,7 +4,7 @@ import './AddProductForm.css';
 import {fetchProducts, NewProduct} from "./productsData.ts";
 
 const AddProductForm: React.FC = () => {
-    const [product, setProduct] = useState<NewProduct>({ name: '', stock: 0, price: 0.0 });
+    const [product, setProduct] = useState<NewProduct>({ name: '', stock: 0, price: 0.0, category:'' });
 
     useEffect(() => {
         fetchProducts();
@@ -23,7 +23,7 @@ const AddProductForm: React.FC = () => {
         try {
             const response = await axios.post('/api/products', product);
             alert(`Product ${response.data.name} added successfully`);
-            setProduct({ name: '', stock: 0, price: 0.0 });
+            setProduct({ name: '', stock: 0, price: 0.0, category:''});
         } catch (error) {
             console.error('Error adding product:', error);
             alert('Failed to add product');
@@ -37,19 +37,25 @@ const AddProductForm: React.FC = () => {
                 <div>
                     <label>
                         Name:
-                        <input type="text" name="name" value={product.name} onChange={handleChange} />
+                        <input type="text" name="name" value={product.name} onChange={handleChange}/>
                     </label>
                 </div>
                 <div>
                     <label>
                         Stock:
-                        <input type="text" name="stock" value={product.stock} onChange={handleChange} />
+                        <input type="text" name="stock" value={product.stock} onChange={handleChange}/>
                     </label>
                 </div>
                 <div>
                     <label>
                         Price:
-                        <input type="text" name="price" value={product.price} onChange={handleChange} />
+                        <input type="text" name="price" value={product.price} onChange={handleChange}/>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Category:
+                        <input type="text" name="price" value={product.category} onChange={handleChange}/>
                     </label>
                 </div>
                 <button type="submit">Add Product</button>

@@ -5,12 +5,14 @@ export interface Product {
     name: string;
     stock: number;
     price: number;
+    category: string;
 }
 
 export interface NewProduct {
     name: string;
     stock: number;
     price: number;
+    category: string;
 }
 
 export const fetchProducts = async (): Promise<Product[]> => {
